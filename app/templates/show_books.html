@@ -10,6 +10,16 @@
     </form>
     
     <br>
+    <br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %} <br>
     
     <table class="table container has-text-centered">
         <thead>
@@ -19,6 +29,9 @@
                 <th>Description</th>
                 <th>Publisher</th>
                 <th>Copies</th>
+                <th>Checked Out By</th>
+                <th>Checkout</th>
+                <th>Checkin</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -30,8 +43,12 @@
               <td>{{ book.description }}</td>
               <td>{{ book.pub_by }}</td>
               <td>{{ book.copies }}</td>
-              <td> <button class="btn btn-warning"><a href="{{ url_for('name.edit_book', id=book.id) }}">Edit</a> </button></td>
-              <td><button class="btn btn-danger"><a href="{{ url_for('name.delete_book', id=book.id) }}">Delete</a></button></td>
+              <td>{{ book.checked_out_by1 }}</td>
+              <td><a href="{{ url_for('name.checkout_book', id=book.id) }}">Checkout</a></td>
+              <td><a href="{{ url_for('name.checkin_book', id=book.id) }}">Checkin</a></td>
+         
+              <td> <button class="btn btn-warning"><a href="{{ url_for('name.edit_book', id=book.id) }}">Edit</a> </button>
+              <button class="btn btn-danger"><a href="{{ url_for('name.delete_book', id=book.id) }}">Delete</a></button></td>
           </tr>
       {% endfor %}
       

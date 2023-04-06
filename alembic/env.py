@@ -15,8 +15,7 @@ if config.config_file_name is not None:
 
 target_metadata = None
 
-my_db_url = "mysql://root:12345678@localhost:3306/Library"
-config.set_main_option('sqlalchemy.url', my_db_url)
+
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -36,7 +35,7 @@ def run_migrations_offline() -> None:
         
         target_metadata=target_metadata,
         literal_binds=True,
-        compare=True,
+      
         dialect_opts={"paramstyle": "named"},
     )
 
@@ -54,7 +53,7 @@ def run_migrations_online() -> None:
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
-        compare=True,
+     
         poolclass=pool.NullPool,
     )
 

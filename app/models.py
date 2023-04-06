@@ -15,3 +15,5 @@ class Books(UserMixin, Base):
     description = Column(String(100), nullable=True)
     pub_by = Column(String(10))
     copies = Column(String(10))
+    checked_out = Column(String(10))
+    checked_out_by1 = Column(String(10))
