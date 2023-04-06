@@ -1,0 +1,6 @@
+{
+    "SECRET_KEY": "9OLWxND4o83j4K4iuopO",
+    "SQLALCHEMY_DATABASE_URI": "mysql://root:12345678@localhost:3306/Library",
+    "SQLALCHEMY_TRACK_MODIFICATIONS": false
+  }
+  

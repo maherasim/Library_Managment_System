@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edit Book</h1>
+  <form method="POST">
+    <div class="form-group">
+    <label for="name">Name:</label>
+
+    <input type="text" id="name" name="name" value="{{ book.name }}"><br></div>
+    <div class="form-group">
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" value="{{ book.description }}"><br>
+    </div>
+    <div class="form-group">
+    <label for="pub_by">Published By:</label>
+    <input type="text" id="pub_by" name="pub_by" value="{{ book.pub_by }}"><br>
+    </div>
+    <div class="form-group">
+    <label for="copies">Copies:</label>
+    <input type="text" id="copies" name="copies" value="{{ book.copies }}"><br>
+    </div>
+    <div class="form-group">
+    <input type="submit" value="Save"></div>
+  </form>
+{% endblock %}
