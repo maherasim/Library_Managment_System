@@ -70,7 +70,7 @@ def checkout_book(id):
         flash(f'Book {book.name} checked out by {borrower_name}')
 
 
-    return render_template('checkout_book.html', book=book)
+    return render_template('checkout_book.html', id=id)
 
 
 @app.route('/checkin_book/<int:id>')
@@ -81,4 +81,4 @@ def checkin_book(id):
     book.checked_out_by1 = None
     session.commit()
     flash('Book successfully checked in')
-    return redirect(url_for('name.checkout_book'))
+    return redirect(url_for('name.checkout_book', id=id))
