@@ -9,7 +9,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 with open('config.json', 'r') as f:
     config = json.load(f)
-    database_uri = config['SQLALCHEMY_DATABASE_URI']
+    database_uri = f"mysql://{config['DB_USERNAME']}:{config['DB_PASSWORD']}@{config['DB_HOST']}:{config['DB_PORT']}/{config['DB_NAME']}"
+
 engine = create_engine(database_uri)
 Base = declarative_base()
 Base.metadata.bind = engine
