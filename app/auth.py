@@ -1,6 +1,15 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required
+
 from .models import User
+from sqlalchemy.orm import (
+    scoped_session,
+    sessionmaker
+)
+from flask import redirect, url_for, flash
+from flask_login import login_user
+from app.models import User
+
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,13 +23,16 @@ with open('config.json', 'r') as f:
 engine = create_engine(database_uri)
 Base = declarative_base()
 Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
+DBSession = scoped_session(sessionmaker(bind=engine))
+target_metadata = Base.metadata
+# DBSession = sessionmaker(bind=engine)
 
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
 def login():
     return render_template('login.html')
+
 
 @auth.route('/login', methods=['POST'])
 def login_post():
@@ -31,9 +43,10 @@ def login_post():
     session = DBSession()
     user = session.query(User).filter_by(email=email).first()
 
-    if not user or not check_password_hash(user.password, password): 
+    if not user or not check_password_hash(user.password, password):
         flash('Please check your login details and try again.')
-        return redirect(url_for('auth.login')) 
+        return redirect(url_for('auth.login'))
+
     login_user(user, remember=remember)
     return redirect(url_for('main.profile'))
 

@@ -5,7 +5,17 @@
 <h1 class="subtitle">
     Add the Books
   </h1>
-
+  <br>
+    <br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %} <br>
 <form action="/add_book" method="post">
     <div class="form-group">
       <label for="email"> Enter Name Book</label>

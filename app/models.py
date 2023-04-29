@@ -1,13 +1,17 @@
 from . import Base
 from sqlalchemy import Column, Integer, String
-class User( Base):
+from flask_login import UserMixin
+
+class User( Base,UserMixin):
     __tablename__ = 'user'
     id = Column(Integer(), primary_key=True,  autoincrement=True)
     email = Column(String(100), unique=True)
     password = Column(String(100), nullable=True)
     name = Column(String(10))
 
-class Books( Base):
+
+
+class Books( Base,UserMixin):
     __tablename__ = 'Books'
     id = Column(Integer(), primary_key=True,  autoincrement=True)
     name = Column(String(100), unique=True)

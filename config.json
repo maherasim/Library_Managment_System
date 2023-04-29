@@ -5,6 +5,6 @@
     "DB_HOST": "localhost",
     "DB_PORT": "3306",
     "DB_NAME": "Library",
-    "SQLALCHEMY_TRACK_MODIFICATIONS": false
+    "SQLALCHEMY_TRACK_MODIFICATIONS": "False"
   }
   

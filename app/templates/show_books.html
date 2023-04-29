@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Book List</h1>
-    <a href="/add_book"><button class="btn btn-danger">Add Book</button></a> <br>
-    <form method="GET" action="{{ url_for('name.index') }}">
-        <label for="id">Search by ID:</label>
-        <input type="text" name="id" id="id">
-        <button type="submit" class="btn btn-danger">Search</button>
-    </form>
+<script>
+    $(document).ready(function() {
+      $('#myTable').DataTable();
+    });
+    </script>
+    <script>
+        $(document).ready(function() {
+          $('#myTable').DataTable();
+        });
+        </script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"/>
+ 
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.plot.ly/plotly-latest.min.css">
+        
     
+    <h1>Book List</h1>
     <br>
-    <br>
+    <a href="/add_book"><button class="btn btn-danger">Add Book</button></a> <br>
+   
+    
+    
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>
@@ -21,10 +34,11 @@
     {% endif %}
 {% endwith %} <br>
     
-    <table class="table container has-text-centered table-bordered">
+
+    <table id="myTable">
         <thead>
-            <tr>
-                <th>ID</th>
+          <tr>
+            <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Publisher</th>
@@ -33,12 +47,12 @@
                 <th>Checkout</th>
                 <th>Checkin</th>
                 <th>Action</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
-          {% for book in results %}
+            {% for book in results %}
           <tr>
-              <td>{{ book.id }}</td>
+            <td>{{ book.id }}</td>
               <td>{{ book.name }}</td>
               <td>{{ book.description }}</td>
               <td>{{ book.pub_by }}</td>
@@ -49,9 +63,12 @@
          
               <td> <button class="btn btn-warning"><a href="{{ url_for('name.edit_book', id=book.id) }}">Edit</a> </button>
               <button class="btn btn-danger"><a href="{{ url_for('name.delete_book', id=book.id) }}">Delete</a></button></td>
+       
+            
           </tr>
-      {% endfor %}
-      
+          {% endfor %}
         </tbody>
-    </table>
+      </table>
+      <div id="book-status">{{ graph|safe }}</div>
+
 {% endblock %}
